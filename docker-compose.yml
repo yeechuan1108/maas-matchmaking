@@ -1,0 +1,41 @@
+services:
+  # 服務 1: Ollama (Local LLM)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_service
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama-models:/root/.ollama
+    tty: true
+
+  # 服務 2: Apache Jena Fuseki (Ontology / Knowledge Graph)
+  fuseki:
+    build: ./fuseki-docker-master
+    container_name: fuseki_service
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./fuseki-data:/fuseki
+    environment:
+      - ADMIN_PASSWORD=admin123
+      - FUSEKI_DATASET=accurateDB
+
+  # 服務 3: Streamlit (Matchmaking Assistant UI)
+  streamlit:
+    build: .
+    container_name: streamlit_service
+    ports:
+      - "8501:8501"
+    depends_on:
+      - ollama
+      - fuseki
+    volumes:
+      - .:/app
+    environment:
+      - OLLAMA_HOST=http://ollama_service:11434
+      - FUSEKI_URL=http://fuseki_service:3030/accurateDB/sparql
+
+networks:
+  default:
+    name: maas_network

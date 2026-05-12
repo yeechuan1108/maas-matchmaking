@@ -1,0 +1,20 @@
+# Ollama models (too large for Git, ~4GB)
+ollama-models/
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Fuseki runtime data (loaded manually via UI)
+fuseki-data/
+
+# Zip archives
+*.zip
+
+# All development versions (archived locally, not for distribution)
+_archive/

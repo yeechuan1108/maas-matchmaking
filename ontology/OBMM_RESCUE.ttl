@@ -1,0 +1,735 @@
+@prefix : <http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@base <http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#> .
+
+<http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo> rdf:type owl:Ontology ;
+                                                                     owl:imports <http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-Universal> ;
+                                                                     :Comment "First try to develop Ontology-Based Matchmaking OBMM for ACCURATE" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://qudt.org/schema/qudt/conversionMultiplierSN
+qudt:conversionMultiplierSN rdfs:range xsd:double .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#GHGEmission
+:GHGEmission rdf:type owl:Class ;
+             rdfs:subClassOf :SustainabilityIndicator .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#Certificate
+:Certificate rdf:type owl:Class ;
+             rdfs:subClassOf :ACCURATE_BaseClass .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#QualityCertificate
+:QualityCertificate rdf:type owl:Class ;
+                    rdfs:subClassOf :Certificate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#SustainabilityCertificate
+:SustainabilityCertificate rdf:type owl:Class ;
+                           rdfs:subClassOf :Certificate .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#AL6061
+:AL6061 rdf:type owl:NamedIndividual ,
+                 :AluminiumAlloy .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS01
+:MS01 rdf:type owl:NamedIndividual ,
+               :ManufacturingService ;
+      :hasCharacteristic :MS01_DT_Characteristic ,
+                         :MS01_GHGE_Characteristic ,
+                         :MS01_EnergyCertificate_Characteristic ,
+                         :MS01_Material_Characteristic ,
+                         :MS01_Precision_Characteristic ,
+                         :MS01_QualityCertificate_Characteristic ,
+                         :MS01_YieldRate_Characteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS01_DT_Characteristic
+:MS01_DT_Characteristic rdf:type owl:NamedIndividual ,
+                                 :QuantifiedCharacteristic ;
+                        :hasQuantity :MS01_DeliveryTime .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS01_DeliveryTime
+:MS01_DeliveryTime rdf:type owl:NamedIndividual ,
+                            :OnTimeDelivery ;
+                   qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                   qudt:numericValue 15 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS01_GHGE_Characteristic
+:MS01_GHGE_Characteristic rdf:type owl:NamedIndividual ,
+                                   :QuantifiedCharacteristic ;
+                          :hasQuantity :MS01_GHGEmission .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS01_GHGEmission
+:MS01_GHGEmission rdf:type owl:NamedIndividual ,
+                           :GHGEmission ;
+                  qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                  qudt:numericValue "25" .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS02
+:MS02 rdf:type owl:NamedIndividual ,
+               :ManufacturingService ;
+      :hasCharacteristic :MS02_DT_Characteristic ,
+                         :MS02_GHGE_Characteristic ,
+                         :MS02_EnergyCertificate_Characteristic ,
+                         :MS02_Material_Characteristic ,
+                         :MS02_Precision_Characteristic ,
+                         :MS02_QualityCertificate_Characteristic ,
+                         :MS02_YieldRate_Characteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS02_DT_Characteristic
+:MS02_DT_Characteristic rdf:type owl:NamedIndividual ,
+                                 :QuantifiedCharacteristic ;
+                        :hasQuantity :MS02_DeliveryTime .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS02_DeliveryTime
+:MS02_DeliveryTime rdf:type owl:NamedIndividual ,
+                            :OnTimeDelivery ;
+                   qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                   qudt:numericValue 10 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS02_GHGE_Characteristic
+:MS02_GHGE_Characteristic rdf:type owl:NamedIndividual ,
+                                   :QuantifiedCharacteristic ;
+                          :hasQuantity :MS02_GHGEmission .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS02_GHGEmission
+:MS02_GHGEmission rdf:type owl:NamedIndividual ,
+                           :GHGEmission ;
+                  qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                  qudt:numericValue "50" .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS03
+:MS03 rdf:type owl:NamedIndividual ,
+               :ManufacturingService ;
+      :hasCharacteristic :MS03_DT_Characteristic ,
+                         :MS03_GHGE_Characteristic ,
+                         :MS03_EnergyCertificate_Characteristic ,
+                         :MS03_Material_Characteristic ,
+                         :MS03_Precision_Characteristic ,
+                         :MS03_QualityCertificate_Characteristic ,
+                         :MS03_YieldRate_Characteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS03_DT_Characteristic
+:MS03_DT_Characteristic rdf:type owl:NamedIndividual ,
+                                 :QuantifiedCharacteristic ;
+                        :hasQuantity :MS03_DeliveryTime .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS03_DeliveryTime
+:MS03_DeliveryTime rdf:type owl:NamedIndividual ,
+                            :OnTimeDelivery ;
+                   qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                   qudt:numericValue 15 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS03_GHGE_Characteristic
+:MS03_GHGE_Characteristic rdf:type owl:NamedIndividual ,
+                                   :QuantifiedCharacteristic ;
+                          :hasQuantity :MS03_GHGEmission .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS03_GHGEmission
+:MS03_GHGEmission rdf:type owl:NamedIndividual ,
+                           :GHGEmission ;
+                  qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                  qudt:numericValue "60" .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS04
+:MS04 rdf:type owl:NamedIndividual ,
+               :ManufacturingService ;
+      :hasCharacteristic :MS04_DT_Characteristic ,
+                         :MS04_Material_Characteristic ,
+                         :MS04_EnergyCertificate_Characteristic ,
+                         :MS04_GHGE_Characteristic ,
+                         :MS04_Precision_Characteristic ,
+                         :MS04_QualityCertificate_Characteristic ,
+                         :MS04_YieldRate_Characteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS04_DT_Characteristic
+:MS04_DT_Characteristic rdf:type owl:NamedIndividual ,
+                                 :QuantifiedCharacteristic ;
+                        :hasQuantity :MS04_DeliveryTime .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS04_DeliveryTime
+:MS04_DeliveryTime rdf:type owl:NamedIndividual ,
+                            :OnTimeDelivery ;
+                   qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                   qudt:numericValue 18 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#MS04_Material_Characteristic
+:MS04_Material_Characteristic rdf:type owl:NamedIndividual ,
+                                       :ProcessableMaterialCharacteristic ,
+                                       :UnquantifiedCharacteristic ;
+                              :hasCharacteristicValue :St37 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#Product01
+:Product01 rdf:type owl:NamedIndividual ,
+                    :Product ;
+           :hasRequirementSet :RequirementSet01 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#Req01_DT20
+:Req01_DT20 rdf:type owl:NamedIndividual ,
+                     :InclusiveMaximumRequirement ;
+            :hasReferenceValue :Req01_DeliveryTime20 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#Req01_DeliveryTime20
+:Req01_DeliveryTime20 rdf:type owl:NamedIndividual ,
+                               :OnTimeDelivery ;
+                      qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                      qudt:numericValue 20 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#Req01_GHG50
+:Req01_GHG50 rdf:type owl:NamedIndividual ,
+                      :InclusiveMaximumRequirement ;
+             :hasReferenceValue :Req01_GHGEmission50 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#Req01_GHGEmission50
+:Req01_GHGEmission50 rdf:type owl:NamedIndividual ,
+                              :GHGEmission ;
+                     qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                     qudt:numericValue "50" .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#RequirementSet01
+:RequirementSet01 rdf:type owl:NamedIndividual ,
+                           :RequirementSet ;
+                  :hasRequirement :Req01_DT20 ,
+                                  :Req01_GHG50 ,
+                                  :Requirement_Material_St37 ,
+                                  :Req01_PrecIT8 ,
+                                  :Req01_YR80 ,
+                                  :Requirement_EC_TUVH2.21 ,
+                                  :Requirement_QC_ISO9001 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#Requirement_Material_St37
+:Requirement_Material_St37 rdf:type owl:NamedIndividual ,
+                                    :UnquantifiedRequirement ;
+                           :hasReferenceValue :St37 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#St37
+:St37 rdf:type owl:NamedIndividual ,
+               :Steel .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#ISO9001
+:ISO9001 rdf:type owl:NamedIndividual ,
+                  :QualityCertificate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS01_EnergyCertificate_Characteristic
+:MS01_EnergyCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                :UnquantifiedCharacteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS01_Material_Characteristic
+:MS01_Material_Characteristic rdf:type owl:NamedIndividual ,
+                                       :ProcessableMaterialCharacteristic ,
+                                       :UnquantifiedCharacteristic ;
+                              :hasCharacteristicValue :AL6061 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS01_Precision
+:MS01_Precision rdf:type owl:NamedIndividual ,
+                         :TechnologicalCapability ;
+                qudt:numericValue 9 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS01_Precision_Characteristic
+:MS01_Precision_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS01_Precision .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS01_QualityCertificate_Characteristic
+:MS01_QualityCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                 :UnquantifiedCharacteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS01_YieldRate
+:MS01_YieldRate rdf:type owl:NamedIndividual ,
+                         :Quality ;
+                qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                qudt:numericValue 85 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS01_YieldRate_Characteristic
+:MS01_YieldRate_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS01_YieldRate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS02_EnergyCertificate_Characteristic
+:MS02_EnergyCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                :UnquantifiedCharacteristic ;
+                                       :hasCharacteristicValue :TUVH2.21 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS02_Material_Characteristic
+:MS02_Material_Characteristic rdf:type owl:NamedIndividual ,
+                                       :ProcessableMaterialCharacteristic ,
+                                       :UnquantifiedCharacteristic ;
+                              :hasCharacteristicValue :AL6061 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS02_Precision
+:MS02_Precision rdf:type owl:NamedIndividual ,
+                         :TechnologicalCapability ;
+                qudt:numericValue 8 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS02_Precision_Characteristic
+:MS02_Precision_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS02_Precision .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS02_QualityCertificate_Characteristic
+:MS02_QualityCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                 :UnquantifiedCharacteristic ;
+                                        :hasCharacteristicValue :ISO9001 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS02_YieldRate
+:MS02_YieldRate rdf:type owl:NamedIndividual ,
+                         :Quality ;
+                qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                qudt:numericValue 87 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS02_YieldRate_Characteristic
+:MS02_YieldRate_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS02_YieldRate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS03_EnergyCertificate_Characteristic
+:MS03_EnergyCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                :UnquantifiedCharacteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS03_Material_Characteristic
+:MS03_Material_Characteristic rdf:type owl:NamedIndividual ,
+                                       :ProcessableMaterialCharacteristic ,
+                                       :UnquantifiedCharacteristic ;
+                              :hasCharacteristicValue :AL6061 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS03_Precision
+:MS03_Precision rdf:type owl:NamedIndividual ,
+                         :TechnologicalCapability ;
+                qudt:numericValue 7 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS03_Precision_Characteristic
+:MS03_Precision_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS03_Precision .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS03_QualityCertificate_Characteristic
+:MS03_QualityCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                 :UnquantifiedCharacteristic ;
+                                        :hasCharacteristicValue :ISO9001 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS03_YieldRate
+:MS03_YieldRate rdf:type owl:NamedIndividual ,
+                         :Quality ;
+                qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                qudt:numericValue 82 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS03_YieldRate_Characteristic
+:MS03_YieldRate_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS03_YieldRate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_EnergyCertificate_Characteristic
+:MS04_EnergyCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                :UnquantifiedCharacteristic ;
+                                       :hasCharacteristicValue :TUVH2.21 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_GHGE_Characteristic
+:MS04_GHGE_Characteristic rdf:type owl:NamedIndividual ,
+                                   :QuantifiedCharacteristic ;
+                          :hasQuantity :MS04_GHGEmission .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_GHGEmission
+:MS04_GHGEmission rdf:type owl:NamedIndividual ,
+                           :GHGEmission ;
+                  qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                  qudt:numericValue 30 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_Precision
+:MS04_Precision rdf:type owl:NamedIndividual ,
+                         :TechnologicalCapability ;
+                qudt:numericValue 6 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_Precision_Characteristic
+:MS04_Precision_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS04_Precision .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_QualityCertificate_Characteristic
+:MS04_QualityCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                 :UnquantifiedCharacteristic ;
+                                        :hasCharacteristicValue :ISO9001 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_YieldRate
+:MS04_YieldRate rdf:type owl:NamedIndividual ,
+                         :Quality ;
+                qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                qudt:numericValue 85 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS04_YieldRate_Characteristic
+:MS04_YieldRate_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS04_YieldRate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05
+:MS05 rdf:type owl:NamedIndividual ,
+               :ManufacturingService ;
+      :hasCharacteristic :MS05_DT_Characteristic ,
+                         :MS05_EnergyCertificate_Characteristic ,
+                         :MS05_GHGE_Characteristic ,
+                         :MS05_Material_Characteristic ,
+                         :MS05_Precision_Characteristic ,
+                         :MS05_QualityCertificate_Characteristic ,
+                         :MS05_YieldRate_Characteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_DT_Characteristic
+:MS05_DT_Characteristic rdf:type owl:NamedIndividual ,
+                                 :QuantifiedCharacteristic ;
+                        :hasQuantity :MS05_DeliveryTime .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_DeliveryTime
+:MS05_DeliveryTime rdf:type owl:NamedIndividual ,
+                            :OnTimeDelivery ;
+                   qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                   qudt:numericValue 12 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_EnergyCertificate_Characteristic
+:MS05_EnergyCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                :UnquantifiedCharacteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_GHGE_Characteristic
+:MS05_GHGE_Characteristic rdf:type owl:NamedIndividual ,
+                                   :QuantifiedCharacteristic ;
+                          :hasQuantity :MS05_GHGEmission .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_GHGEmission
+:MS05_GHGEmission rdf:type owl:NamedIndividual ,
+                           :GHGEmission ;
+                  qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                  qudt:numericValue 50 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_Material_Characteristic
+:MS05_Material_Characteristic rdf:type owl:NamedIndividual ,
+                                       :ProcessableMaterialCharacteristic ,
+                                       :UnquantifiedCharacteristic ;
+                              :hasCharacteristicValue :St37 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_Precision
+:MS05_Precision rdf:type owl:NamedIndividual ,
+                         :TechnologicalCapability ;
+                qudt:numericValue 7 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_Precision_Characteristic
+:MS05_Precision_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS05_Precision .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_QualityCertificate_Characteristic
+:MS05_QualityCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                 :UnquantifiedCharacteristic ;
+                                        :hasCharacteristicValue :ISO9001 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_YieldRate
+:MS05_YieldRate rdf:type owl:NamedIndividual ,
+                         :Quality ;
+                qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                qudt:numericValue 81 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS05_YieldRate_Characteristic
+:MS05_YieldRate_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS05_YieldRate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06
+:MS06 rdf:type owl:NamedIndividual ,
+               :ManufacturingService ;
+      :hasCharacteristic :MS06_DT_Characteristic ,
+                         :MS06_EnergyCertificate_Characteristic ,
+                         :MS06_GHGE_Characteristic ,
+                         :MS06_Material_Characteristic ,
+                         :MS06_Precision_Characteristic ,
+                         :MS06_QualityCertificate_Characteristic ,
+                         :MS06_YieldRate_Characteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_DT_Characteristic
+:MS06_DT_Characteristic rdf:type owl:NamedIndividual ,
+                                 :QuantifiedCharacteristic ;
+                        :hasQuantity :MS06_DeliveryTime .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_DeliveryTime
+:MS06_DeliveryTime rdf:type owl:NamedIndividual ,
+                            :OnTimeDelivery ;
+                   qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                   qudt:numericValue 16 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_EnergyCertificate_Characteristic
+:MS06_EnergyCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                :UnquantifiedCharacteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_GHGE_Characteristic
+:MS06_GHGE_Characteristic rdf:type owl:NamedIndividual ,
+                                   :QuantifiedCharacteristic ;
+                          :hasQuantity :MS06_GHGEmission .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_GHGEmission
+:MS06_GHGEmission rdf:type owl:NamedIndividual ,
+                           :GHGEmission ;
+                  qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                  qudt:numericValue 40 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_Material_Characteristic
+:MS06_Material_Characteristic rdf:type owl:NamedIndividual ,
+                                       :ProcessableMaterialCharacteristic ,
+                                       :UnquantifiedCharacteristic ;
+                              :hasCharacteristicValue :St37 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_Precision
+:MS06_Precision rdf:type owl:NamedIndividual ,
+                         :TechnologicalCapability ;
+                qudt:numericValue 6 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_Precision_Characteristic
+:MS06_Precision_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS06_Precision .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_QualityCertificate_Characteristic
+:MS06_QualityCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                 :UnquantifiedCharacteristic ;
+                                        :hasCharacteristicValue :ISO9001 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_YieldRate
+:MS06_YieldRate rdf:type owl:NamedIndividual ,
+                         :Quality ;
+                qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                qudt:numericValue 90 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS06_YieldRate_Characteristic
+:MS06_YieldRate_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS06_YieldRate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07
+:MS07 rdf:type owl:NamedIndividual ,
+               :ManufacturingService ;
+      :hasCharacteristic :MS07_DT_Characteristic ,
+                         :MS07_EnergyCertificate_Characteristic ,
+                         :MS07_GHGE_Characteristic ,
+                         :MS07_Material_Characteristic ,
+                         :MS07_Precision_Characteristic ,
+                         :MS07_QualityCertificate_Characteristic ,
+                         :MS07_YieldRate_Characteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_DT_Characteristic
+:MS07_DT_Characteristic rdf:type owl:NamedIndividual ,
+                                 :QuantifiedCharacteristic ;
+                        :hasQuantity :MS07_DeliveryTime .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_DeliveryTime
+:MS07_DeliveryTime rdf:type owl:NamedIndividual ,
+                            :OnTimeDelivery ;
+                   qudt:unit <http://qudt.org/vocab/unit/DAY> ;
+                   qudt:numericValue 10 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_EnergyCertificate_Characteristic
+:MS07_EnergyCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                :UnquantifiedCharacteristic ;
+                                       :hasCharacteristicValue :TUVH2.21 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_GHGE_Characteristic
+:MS07_GHGE_Characteristic rdf:type owl:NamedIndividual ,
+                                   :QuantifiedCharacteristic ;
+                          :hasQuantity :MS07_GHGEmission .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_GHGEmission
+:MS07_GHGEmission rdf:type owl:NamedIndividual ,
+                           :GHGEmission ;
+                  qudt:unit <http://qudt.org/vocab/unit/KiloGM> ;
+                  qudt:numericValue 25 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_Material_Characteristic
+:MS07_Material_Characteristic rdf:type owl:NamedIndividual ,
+                                       :ProcessableMaterialCharacteristic ,
+                                       :UnquantifiedCharacteristic ;
+                              :hasCharacteristicValue :St37 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_Precision
+:MS07_Precision rdf:type owl:NamedIndividual ,
+                         :TechnologicalCapability ;
+                qudt:numericValue 8 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_Precision_Characteristic
+:MS07_Precision_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS07_Precision .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_QualityCertificate_Characteristic
+:MS07_QualityCertificate_Characteristic rdf:type owl:NamedIndividual ,
+                                                 :UnquantifiedCharacteristic .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_YieldRate
+:MS07_YieldRate rdf:type owl:NamedIndividual ,
+                         :Quality ;
+                qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                qudt:numericValue 80 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#MS07_YieldRate_Characteristic
+:MS07_YieldRate_Characteristic rdf:type owl:NamedIndividual ,
+                                        :QuantifiedCharacteristic ;
+                               :hasQuantity :MS07_YieldRate .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#Req01_PrecIT8
+:Req01_PrecIT8 rdf:type owl:NamedIndividual ,
+                        :InclusiveMaximumRequirement ;
+               :hasReferenceValue :Req01_PrecIT8 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#Req01_PrecisionIT8
+:Req01_PrecisionIT8 rdf:type owl:NamedIndividual ,
+                             :TechnologicalCapability ;
+                    qudt:numericValue 8 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#Req01_YR80
+:Req01_YR80 rdf:type owl:NamedIndividual ,
+                     :InclusiveMinimumRequirement ;
+            :hasReferenceValue :Req01_YieldRate80 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#Req01_YieldRate80
+:Req01_YieldRate80 rdf:type owl:NamedIndividual ,
+                            :Quality ;
+                   qudt:unit <http://qudt.org/vocab/unit/PERCENT> ;
+                   qudt:numericValue 80 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#Requirement_EC_TUVH2.21
+:Requirement_EC_TUVH2.21 rdf:type owl:NamedIndividual ,
+                                  :UnquantifiedRequirement ;
+                         :hasReferenceValue :TUVH2.21 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#Requirement_QC_ISO9001
+:Requirement_QC_ISO9001 rdf:type owl:NamedIndividual ,
+                                 :UnquantifiedRequirement ;
+                        :hasReferenceValue :ISO9001 .
+
+
+###  http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE-OBMMDemo#TUVH2.21
+:TUVH2.21 rdf:type owl:NamedIndividual ,
+                   :SustainabilityCertificate .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
