@@ -38,7 +38,7 @@ After installation, make sure Docker Desktop is running (whale icon in system tr
 
 Download and extract the ZIP, or clone via Git:
 ```bash
-git clone <repository-url>
+git clone https://github.com/yeechuan1108/maas-matchmaking.git
 cd maas-matchmaking
 ```
 
@@ -49,9 +49,10 @@ Open a terminal in the `maas-matchmaking` folder and run:
 docker compose up -d
 ```
 
-This will start three services:
+This will automatically start and configure four services:
 - **Ollama** at `http://localhost:11434`
 - **Fuseki** at `http://localhost:3030`
+- **Fuseki-init** — loads the ontology automatically on first startup
 - **Streamlit** at `http://localhost:8501`
 
 First startup takes 5–10 minutes as Docker builds the images.
@@ -65,23 +66,11 @@ docker exec ollama_service ollama pull llama3.1
 
 This downloads ~4 GB and takes several minutes depending on internet speed.
 
-### Step 6 — Load the ontology into Fuseki
-
-This step must be done once after every fresh start:
-
-1. Open your browser and go to: `http://localhost:3030`
-2. Login with:
-   - Username: `admin`
-   - Password: `admin123`
-3. Click **"manage datasets"** → select **`accurateDB`** → click **"upload data"**
-4. Upload the file: `ontology/OBMM_RESCUE.ttl`
-5. Click **"upload now"**
-
-### Step 7 — Open the Matchmaking Assistant
+### Step 6 — Open the Matchmaking Assistant
 
 Go to: **`http://localhost:8501`**
 
-The assistant is ready to use.
+The assistant is ready to use. The ontology is loaded automatically — no manual upload required.
 
 ---
 
@@ -90,11 +79,11 @@ The assistant is ready to use.
 Each time you want to use the system:
 
 ```bash
-# Start all services
+# Start all services (ontology loads automatically)
 docker compose up -d
 
-# Wait ~30 seconds, then load the ontology (Step 6 above)
-# Open http://localhost:8501
+# Wait ~30 seconds, then open:
+# http://localhost:8501
 ```
 
 To stop all services:
@@ -110,8 +99,12 @@ docker compose down
 - Wait 30–60 seconds after `docker compose up` for all services to initialize.
 - Check all containers are running: `docker ps`
 
-**Fuseki shows empty results**
-- The ontology must be re-uploaded after each `docker compose up`. Follow Step 6 again.
+**No results returned from queries**
+- Check if the ontology loaded correctly:
+  ```bash
+  docker logs fuseki_init
+  ```
+  You should see `Ontology loaded successfully!` at the end.
 
 **Ollama model not found**
 - Run `docker exec ollama_service ollama pull llama3.1` again.
@@ -126,13 +119,13 @@ docker compose down
 
 ```
 maas-matchmaking/
-├── docker-compose.yml                      # Orchestrates all 3 services
+├── docker-compose.yml                      # Orchestrates all 4 services
 ├── Dockerfile                              # Builds the Streamlit container
 ├── requirements.txt                        # Python dependencies
 ├── matchmaking-assistant-final-withUI.py   # Main application (with UI)
-├── matchmaking-assistant-final-RDversion.py # Research version (no UI, for development)
+├── matchmaking-assistant-final-RDversion.py # Research version (no UI)
 ├── ontology/
-│   └── OBMM_RESCUE.ttl                     # OWL ontology (upload to Fuseki)
+│   └── OBMM_RESCUE.ttl                     # OWL ontology (auto-loaded)
 ├── fuseki-docker-master/                   # Fuseki Docker build files
 └── ollama-models/                          # Llama 3.1 model files (local only)
 ```
