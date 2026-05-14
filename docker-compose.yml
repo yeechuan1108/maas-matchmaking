@@ -1,5 +1,5 @@
 services:
-  # 服務 1: Ollama (Local LLM)
+  # Service 1: Ollama (Local LLM)
   ollama:
     image: ollama/ollama:latest
     container_name: ollama_service
@@ -9,7 +9,7 @@ services:
       - ./ollama-models:/root/.ollama
     tty: true
 
-  # 服務 2: Apache Jena Fuseki (Ontology / Knowledge Graph)
+  # Service 2: Apache Jena Fuseki (Ontology / Knowledge Graph)
   fuseki:
     build: ./fuseki-docker-master
     container_name: fuseki_service
@@ -21,7 +21,31 @@ services:
       - ADMIN_PASSWORD=admin123
       - FUSEKI_DATASET=accurateDB
 
-  # 服務 3: Streamlit (Matchmaking Assistant UI)
+  # Service 3: Auto-load Ontology (Run once Fuseki is ready)
+  fuseki-init:
+    image: curlimages/curl:latest
+    container_name: fuseki_init
+    depends_on:
+      - fuseki
+    volumes:
+      - ./ontology:/ontology
+    entrypoint: >
+      sh -c "
+        echo 'Waiting for Fuseki to be ready...' &&
+        until curl -s -u admin:admin123 http://fuseki_service:3030/$/ping > /dev/null 2>&1; do
+          sleep 3;
+        done &&
+        echo 'Fuseki is ready. Loading ontology...' &&
+        curl -X POST
+          -H 'Content-Type: text/turtle'
+          --data-binary @/ontology/OBMM_RESCUE.ttl
+          --user admin:admin123
+          http://fuseki_service:3030/accurateDB/data &&
+        echo 'Ontology loaded successfully!'
+      "
+    restart: "no"
+
+  # Service 4: Streamlit (Matchmaking Assistant UI)
   streamlit:
     build: .
     container_name: streamlit_service
@@ -33,8 +57,8 @@ services:
     volumes:
       - .:/app
     environment:
-      - OLLAMA_HOST=http://ollama_service:11434
       - FUSEKI_URL=http://fuseki_service:3030/accurateDB/sparql
+      - OLLAMA_HOST=http://ollama_service:11434
 
 networks:
   default:
