@@ -1,7 +1,7 @@
 """
-ACCURATE Matchmaking Assistant — v32
+ACCURATE Matchmaking Assistant
 =============================================
-v32 新增 (based on the user-centric 4-layer protection design)：
+v32 New (based on the user-centric 4-layer protection design)：
   [Fix 1] Enhanced prompt extraction: Prevents compound sentences (e.g., “under X and higher Y”) from missing half of the conditions.
   [Fix 2] EEnhanced error messages: Provides extremely detailed and informative error prompts for Precision.
   [Fix 3] Debug Panel: Visualizes the inverse logic of IT numbers in “Detected Filter Conditions.”
