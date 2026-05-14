@@ -1,5 +1,5 @@
 """
-ACCURATE Matchmaking Assistant — v32
+ACCURATE Matchmaking Assistant
 =============================================
 v32 New (based on the user-centric 4-layer protection design)：
   [Fix 1] Enhanced prompt extraction: Prevents compound sentences (e.g., “under X and higher Y”) from missing half of the conditions.
@@ -64,7 +64,7 @@ qudt:unit                a owl:ObjectProperty .
 try:
     OLLAMA_BASE_URL = os.environ.get(
     "OLLAMA_HOST",
-    "http://localhost:11434"
+    "http://host.docker.internal:11434"
     )
     llm = OllamaLLM(model="llama3.1", base_url=OLLAMA_BASE_URL, temperature=0)
     st.caption("✅ Ollama (Llama 3.1) Initialization Successful")
