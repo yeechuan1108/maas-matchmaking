@@ -22,13 +22,17 @@ import pandas as pd  # ── 🏗️ New: Handling interactive data tables ─�
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 from SPARQLWrapper import SPARQLWrapper, JSON as SPARQL_JSON
+import os
 
 # ──────────────────────────────────────────────
 # Basic Settings
 # ──────────────────────────────────────────────
 st.set_page_config(page_title="ACCURATE Matchmaking Assistant", layout="wide")
 
-FUSEKI_URL = "http://localhost:3030/accurateDB/sparql"
+FUSEKI_URL = os.environ.get(
+    "FUSEKI_URL",
+    "http://localhost:3030/accurateDB/sparql"
+)
 ACC = "http://accurate.de.iao.fraunhofer.de/ontologies/ACCURATE#"
 
 # Session State Initialization
@@ -58,7 +62,11 @@ qudt:unit                a owl:ObjectProperty .
 # LLM Initialization
 # ──────────────────────────────────────────────
 try:
-    llm = OllamaLLM(model="llama3.1", temperature=0)
+    OLLAMA_BASE_URL = os.environ.get(
+    "OLLAMA_HOST",
+    "http://localhost:11434"
+    )
+    llm = OllamaLLM(model="llama3.1", base_url=OLLAMA_BASE_URL, temperature=0)
     st.caption("✅ Ollama (Llama 3.1) Initialization Successful")
 except Exception as e:
     st.error(f"❌ Failed to initialize Ollama: {e}")
