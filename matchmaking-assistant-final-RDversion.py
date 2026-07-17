@@ -60,7 +60,7 @@ qudt:unit                a owl:ObjectProperty .
 try:
     OLLAMA_BASE_URL = os.environ.get(
     "OLLAMA_HOST",
-    "http://host.docker.internal:11434"
+    "http://localhost:11434"
     )
     llm = OllamaLLM(model="llama3.1", base_url=OLLAMA_BASE_URL, temperature=0)
 except Exception as e:
