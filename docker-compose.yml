@@ -35,7 +35,7 @@ services:
       - .:/app
     environment:
       - FUSEKI_URL=http://fuseki_service:3030/accurateDB/sparql
-      - OLLAMA_HOST=http://172.18.0.1:11434
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
 
 networks:
   default:
