@@ -11,7 +11,7 @@ services:
       - ADMIN_PASSWORD=admin123
       - FUSEKI_DATASET=accurateDB
 
-  # 服務 2: 自動載入 Ontology（等 Fuseki 準備好後執行一次）
+  # 服務 2: 自動建立 Dataset 並載入 Ontology
   fuseki-init:
     image: curlimages/curl:latest
     container_name: fuseki_init
@@ -19,20 +19,8 @@ services:
       - fuseki
     volumes:
       - ./ontology:/ontology
-    entrypoint: >
-      sh -c "
-        echo 'Waiting for Fuseki to be ready...' &&
-        until curl -s -u admin:admin123 http://fuseki_service:3030/$/ping > /dev/null 2>&1; do
-          sleep 3;
-        done &&
-        echo 'Fuseki is ready. Loading ontology...' &&
-        curl -X POST
-          -H 'Content-Type: text/turtle'
-          --data-binary @/ontology/OBMM_RESCUE.ttl
-          --user admin:admin123
-          http://fuseki_service:3030/accurateDB/data &&
-        echo 'Ontology loaded successfully!'
-      "
+      - ./fuseki-init.sh:/fuseki-init.sh
+    entrypoint: ["/bin/sh", "/fuseki-init.sh"]
     restart: "no"
 
   # 服務 3: Streamlit (Matchmaking Assistant UI)
@@ -47,7 +35,7 @@ services:
       - .:/app
     environment:
       - FUSEKI_URL=http://fuseki_service:3030/accurateDB/sparql
-      - OLLAMA_HOST=http://host.docker.internal:11434
+      - OLLAMA_HOST=http://172.18.0.1:11434
 
 networks:
   default:
